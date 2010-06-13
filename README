@@ -1,0 +1,5 @@
+This is the Android app I'm making for the Hackers on Planet Earth conference for 2010. It should be about the same as the iPhone app I'm making. It will mainly be used to easily keep track of the HOPE schedule, and maybe other things.
+
+I'm primarily going to write it in Javascript, HTML, and CSS, and just render it in a webview.
+
+http://www.thenexthope.org/

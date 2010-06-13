@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<WebView
-	android:id="@+id/webview"  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    />
+<LinearLayout
+	android:id="@+id/widget28"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+	<WebView
+		android:id="@+id/webview"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="TextView"
+		android:layout_weight="1"
+		/>
+	<LinearLayout
+		android:id="@+id/buttons"
+		android:layout_width="fill_parent"
+		android:layout_height="40px"
+		android:gravity="bottom"
+		>
+		<Button
+			android:id="@+id/scheduleButton"
+			android:layout_width="wrap_content"
+			android:layout_height="40px"
+			android:background="#ff333333"
+			android:text="Schedule"
+			android:textColor="#ff99ff99"
+			android:layout_weight="1"
+			/>
+		<Button
+			android:id="@+id/favoritesButton"
+			android:layout_width="wrap_content"
+			android:layout_height="40px"
+			android:text="Favorites"
+			android:layout_weight="1"
+			/>
+		<Button
+			android:id="@+id/twitterButton"
+			android:layout_width="wrap_content"
+			android:layout_height="40px"
+			android:text="Twitter"
+			android:layout_weight="1"
+			/>
+	</LinearLayout>
 </LinearLayout>

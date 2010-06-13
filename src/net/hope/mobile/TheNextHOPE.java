@@ -44,10 +44,7 @@ public class TheNextHOPE extends Activity {
         });
     }
     
-    /* schedule button */
-    
-    
-    /* favorites button */
-    
-    /* twitter button */
+    public void updateTwitter() {
+    	String url = "https://twitter.com/statuses/user_timeline/74795958.rss";
+    }
 }

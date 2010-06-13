@@ -23,9 +23,7 @@
 			android:id="@+id/scheduleButton"
 			android:layout_width="wrap_content"
 			android:layout_height="40px"
-			android:background="#ff333333"
 			android:text="Schedule"
-			android:textColor="#ff99ff99"
 			android:layout_weight="1"
 			/>
 		<Button

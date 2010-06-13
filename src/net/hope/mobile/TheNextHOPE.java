@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
-public class Schedule extends Activity {
+public class TheNextHOPE extends Activity {
 	WebView webview;
 	
     /** Called when the activity is first created. */

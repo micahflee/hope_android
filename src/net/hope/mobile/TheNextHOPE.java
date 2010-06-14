@@ -1,7 +1,6 @@
 package net.hope.mobile;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,10 +19,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+//import android.widget.Toast;
 
 public class TheNextHOPE extends Activity {
-	private String SCHEDULE_FILENAME = "schedule.json";
-	
 	private WebView webview;
 	private Button scheduleButton;
 	private Button favoritesButton;
@@ -34,6 +32,9 @@ public class TheNextHOPE extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        // how to make popups
+        // Toast.makeText(getBaseContext(), "my string here", Toast.LENGTH_SHORT).show();
         
         // initialize the buttons
         scheduleButton = (Button) findViewById(R.id.scheduleButton);
@@ -56,8 +57,8 @@ public class TheNextHOPE extends Activity {
         });
         
         // check for internet connectivity
-        if(isOnline()) {
-        	/*// download newest schedule
+        /*if(isOnline()) {
+        	// download newest schedule
         	String scheduleJSON = getUrlData("http://hope.banditdefense.com/json.php");
         	
         	// save it to a file for the webview to access
@@ -68,12 +69,62 @@ public class TheNextHOPE extends Activity {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
+        }*/
+        
+        /*// try loading and reading file
+        FileInputStream fIn = null; 
+        InputStreamReader isr = null;
+        char[] inputBuffer = new char[255]; 
+        String data = null;
+        try{
+        	fIn = openFileInput(SCHEDULE_FILENAME);
+        	isr = new InputStreamReader(fIn); 
+        	isr.read(inputBuffer); 
+        	data = new String(inputBuffer);
+        } 
+        catch (Exception e) {       
+        	e.printStackTrace(); 
+        } 
+        finally { 
+        	try { 
+        		isr.close(); 
+        		fIn.close(); 
+        	} catch (IOException e) { 
+        		e.printStackTrace(); 
+        	} 
         }
+        Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
+        
+        // try saving a file
+        String fakeJSON = "document.innerHTML = '<h1>just a test</h1>';";
+        FileOutputStream fOut = null;
+        OutputStreamWriter osw = null;
+        try{
+        	fOut = openFileOutput(SCHEDULE_FILENAME, MODE_PRIVATE);      
+        	osw = new OutputStreamWriter(fOut);
+        	osw.write(fakeJSON);
+        	osw.flush();
+        }
+        catch (Exception e) {      
+        	e.printStackTrace();
+        }
+        finally {
+        	try {
+        		osw.close();
+        		fOut.close();
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+        }*/
         
         // initialize the web view
+        JSInterface jsInterface = new JSInterface();
+        jsInterface.context = getBaseContext();
         webview = (WebView) findViewById(R.id.webview);
+        webview.getSettings().setAllowFileAccess(true);
         webview.getSettings().setJavaScriptEnabled(true);
+        webview.addJavascriptInterface(jsInterface, "JSInterface");
         webview.loadUrl("file:///android_asset/www/schedule.html");
     }
     

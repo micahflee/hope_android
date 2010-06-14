@@ -1,12 +1,15 @@
 <html>
 <head>
 <title>Schedule</title>
-<script language="javascript" src="file:///android_asset/www/jquery-1.4.2.min.js"></script>
-<script language="javascript"></script>
-<link href="file:///android_asset/www/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    <h1>Schedule!</h1>
+<h1>Schedule!</h1>
+<div id="test">just a test 8</div>
+
+<script language="javascript">
+    document.getElementById("test").innerHTML = 'before';
+    document.getElementById("test").innerHTML = window.JSInterface.getScheduleJSON();
+</script>
 </body>
 </html>

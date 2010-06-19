@@ -25,7 +25,7 @@ public class TheNextHOPE extends Activity {
 	private WebView webview;
 	private Button scheduleButton;
 	private Button favoritesButton;
-	private Button twitterButton;
+	private Button iaciendaButton;
 	
     /** Called when the activity is first created. */
     @Override
@@ -49,10 +49,9 @@ public class TheNextHOPE extends Activity {
         		webview.loadUrl("file:///android_asset/www/favorites.html");
         	}
         });
-        twitterButton= (Button) findViewById(R.id.twitterButton);
-        twitterButton.setOnClickListener(new View.OnClickListener() {
+        iaciendaButton= (Button) findViewById(R.id.iaciendaButton);
+        iaciendaButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		webview.loadUrl("file:///android_asset/www/twitter.html");
         	}
         });
         

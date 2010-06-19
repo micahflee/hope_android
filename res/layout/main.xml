@@ -34,10 +34,10 @@
 			android:layout_weight="1"
 			/>
 		<Button
-			android:id="@+id/twitterButton"
+			android:id="@+id/iaciendaButton"
 			android:layout_width="wrap_content"
 			android:layout_height="40px"
-			android:text="Twitter"
+			android:text="Iacienda"
 			android:layout_weight="1"
 			/>
 	</LinearLayout>

@@ -56,22 +56,6 @@ public class TheNextHOPE extends Activity {
         	}
         });
         
-        // check for internet connectivity
-        /*if(isOnline()) {
-        	// download newest schedule
-        	String scheduleJSON = getUrlData("http://hope.banditdefense.com/json.php");
-        	
-        	// save it to a file for the webview to access
-			try {
-				FileOutputStream fos = openFileOutput(SCHEDULE_FILENAME, Context.MODE_PRIVATE);
-				fos.write(scheduleJSON.getBytes());
-				fos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }*/
-        
         /*// try loading and reading file
         FileInputStream fIn = null; 
         InputStreamReader isr = null;
@@ -131,49 +115,5 @@ public class TheNextHOPE extends Activity {
     public boolean isOnline() {
     	ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
     	return cm.getActiveNetworkInfo().isConnected();
-    }
-    
-    public String getUrlData(String url) {
-    	String websiteData = null;
-    	try {
-    		DefaultHttpClient client = new DefaultHttpClient();
-    		URI uri = new URI(url);
-    		HttpGet method = new HttpGet(uri);
-    		HttpResponse res = client.execute(method);
-    		InputStream data = res.getEntity().getContent();
-    		websiteData = generateString(data);
-    	} catch (ClientProtocolException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	} catch (URISyntaxException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-    	return websiteData;
-    }
-    
-    public String generateString(InputStream stream) {
-    	InputStreamReader reader = new InputStreamReader(stream);
-    	BufferedReader buffer = new BufferedReader(reader);
-    	StringBuilder sb = new StringBuilder();
-    	try {
-    		String cur;
-    		while ((cur = buffer.readLine()) != null) {
-    				sb.append(cur + "\n");
-    		}
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-    	try {
-    		stream.close();
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-    	return sb.toString();
     }
 }

@@ -1,15 +1,18 @@
 <html>
 <head>
 <title>Schedule</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        data.getInfo();
+    });
+</script>
 </head>
 
 <body>
-<h1>Schedule!</h1>
-<div id="test">just a test 8</div>
-
-<script language="javascript">
-    document.getElementById("test").innerHTML = 'before';
-    document.getElementById("test").innerHTML = window.JSInterface.getScheduleJSON();
-</script>
+    <h1>Schedule</h1>
+    <div id="content"></div>
 </body>
 </html>

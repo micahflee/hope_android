@@ -2,3 +2,52 @@ body {
     color: #ffffff;
     background-color: #000000;
 }
+
+.talk {
+    width: 320px;
+    margin-bottom: 10px;
+    font-family: courier;
+    font-size: 14px;
+}
+
+.talk .fav {
+    width: 20px;
+    float: left;
+    margin-right: 5px;
+}
+
+.talk .content {
+    width: 295px;
+    float: left;
+}
+
+.talk .title {
+    font-weight: bold;
+}
+
+.talk .speakers {
+}
+
+.talk .speaker {
+    display: inline;
+    color: #AFAFAF;
+    font-size: 13px;
+    text-decoration: underline;
+}
+
+.talk .meta {
+    font-size: 13px;
+    color: #999999;
+}
+
+.talk .description {
+    margin-top: 5px;
+    padding: 5px;
+    background-color: #111111;
+    border: 1px solid #333333;
+    display: none;
+}
+
+.cleared {
+    clear: both;
+}

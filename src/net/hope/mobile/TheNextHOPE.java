@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-//import android.widget.Toast;
+import android.widget.Toast;
 
 public class TheNextHOPE extends Activity {
 	private WebView webview;
@@ -33,25 +33,25 @@ public class TheNextHOPE extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        // how to make popups
-        // Toast.makeText(getBaseContext(), "my string here", Toast.LENGTH_SHORT).show();
-        
         // initialize the buttons
         scheduleButton = (Button) findViewById(R.id.scheduleButton);
         scheduleButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		webview.loadUrl("file:///android_asset/www/schedule.html");
+        		Toast.makeText(getBaseContext(), "Loading Schedule", Toast.LENGTH_LONG).show();
         	}
         });
         favoritesButton = (Button) findViewById(R.id.favoritesButton);
         favoritesButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		webview.loadUrl("file:///android_asset/www/favorites.html");
+        		Toast.makeText(getBaseContext(), "Loading Favorites", Toast.LENGTH_LONG).show();
         	}
         });
         iaciendaButton= (Button) findViewById(R.id.iaciendaButton);
         iaciendaButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
+        		Toast.makeText(getBaseContext(), "Coming Soon", Toast.LENGTH_LONG).show();
         	}
         });
         

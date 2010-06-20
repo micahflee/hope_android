@@ -4,9 +4,47 @@
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/data.js"></script>
+<script type="text/javascript" src="js/helpers.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        data.numberOfEvents();
+        var i,j;
+
+        // display all the events    
+        var html = '';
+        for(i=0; i<data.talks().length; i++) {
+            var talk = data.talks()[i];
+            html += '<div class="talk" id="talk'+talk.id+'">';
+            html += '<div class="fav"><img src="images/fav_dim.png"/></div>';
+            html += '<div class="content">';
+            // title
+            html += '<div class="title">'+talk.title+'</div>';
+            // time, location
+            html += '<div class="meta">'+formatted_date(talk.timestamp)+' | '+talk.location+'</div>';
+            // speaker(s)
+            html += '<div class="speakers">';
+            for(j=0; j<talk.speakers.length; j++) {
+                var speaker = talk.speakers[j];
+                html += '<div class="speaker">'+speaker.name+'</div>';
+                if(j < talk.speakers.length-1)
+                    html += ', ';
+            }
+            html += '</div>';
+            // description
+            html += '<div class="description">'+talk.description+'</div>';
+            // footer
+            html += '</div>';
+            html += '<div class="cleared"></div>';
+            html += '</div>';
+        }
+        $("#content").html(html);
+        
+        // bind description show/hide
+        for(i=0; i<data.talks().length; i++) {
+            $("#talk"+talk.id).bind('click', function() {
+                alert('does this work?');
+                //$("#talk"+talk.id+" .description").show();
+            });
+        }
     });
 </script>
 </head>

@@ -21,6 +21,10 @@ h1 {
     color: #FFD02F;
 }
 
+p.only {
+    margin: 30px;
+}
+
 #filter {
     text-align: center;
     font-weight: bold;

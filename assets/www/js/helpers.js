@@ -103,6 +103,13 @@ function display_talk(talk) {
 
 function display_talks() {
     var html = '';
+    
+    if(!data.talks().length) {
+        html += '<p class="only">It looks like you don\'t have the schedule downloaded yet. You must open this app while connected to the internet at least once to download the schedule.</p>';
+        $("#content").html(html);
+        return;
+    }
+    
     html += filter.display();
     
     // display all the talks for the current day

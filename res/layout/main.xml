@@ -33,12 +33,5 @@
 			android:text="Favorites"
 			android:layout_weight="1"
 			/>
-		<Button
-			android:id="@+id/iaciendaButton"
-			android:layout_width="wrap_content"
-			android:layout_height="40px"
-			android:text="Iacienda"
-			android:layout_weight="1"
-			/>
 	</LinearLayout>
 </LinearLayout>

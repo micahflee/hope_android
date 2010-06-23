@@ -14,7 +14,7 @@ public class TheNextHOPE extends Activity {
 	private WebView webview;
 	private Button scheduleButton;
 	private Button favoritesButton;
-	private Button iaciendaButton;
+	//private Button iaciendaButton;
 	
     /** Called when the activity is first created. */
     @Override
@@ -37,12 +37,12 @@ public class TheNextHOPE extends Activity {
         		Toast.makeText(getBaseContext(), "Loading Favorites", Toast.LENGTH_SHORT).show();
         	}
         });
-        iaciendaButton= (Button) findViewById(R.id.iaciendaButton);
+        /*iaciendaButton= (Button) findViewById(R.id.iaciendaButton);
         iaciendaButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		Toast.makeText(getBaseContext(), "Iacienda Coming Soon", Toast.LENGTH_SHORT).show();
         	}
-        });
+        });*/
         
         // initialize the web view
         JSInterface jsInterface = new JSInterface(getBaseContext());

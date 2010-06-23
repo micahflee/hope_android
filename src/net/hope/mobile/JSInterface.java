@@ -28,7 +28,7 @@ public class JSInterface {
 		
 		// initialize preferences
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
-		prefJSON = settings.getString("json", "{}");
+		prefJSON = settings.getString("json", "{ }");
 		prefFavorites = settings.getString("favorites", "");
 		prefFilter = settings.getString("filter", "all");
 	}

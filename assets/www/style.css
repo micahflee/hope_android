@@ -85,23 +85,6 @@ h1 {
     margin-top: 5px;
 }
 
-.talk .speaker-details-button {
-    color: #b1e8a6;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-.talk .speaker-details {
-    display: none;
-    margin-top: 5px;
-    color: #e0e0e0;
-}
-
-.talk .speaker-details .speaker-name {
-    font-weight: bold;
-    color: #efefef;
-}
-
 .cleared {
     clear: both;
 }

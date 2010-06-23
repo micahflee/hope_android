@@ -22,13 +22,6 @@ function bind_talk_callbacks() {
                 favorites.add(talk_id);
             }
         });
-        
-        // bind speaker details button show/hide
-        $("#speaker-details-button"+talk.id).toggle(function() {
-            $("#speaker-details"+talk.id).show(200);
-        }, function() {
-            $("#speaker-details"+talk.id).hide(200);
-        });
     }
 }
 
@@ -100,19 +93,7 @@ function display_talk(talk) {
     }
     html += '</div>';
     // description
-    html += '<div class="description">';
-    html += talk.description;
-    // speaker details button
-    html += '<div class="speaker-details-button" id="speaker-details-button'+talk.id+'">{[( speaker details }])</div>';
-    // speaker details
-    html += '<div class="speaker-details" id="speaker-details'+talk.id+'">';
-    for(i=0; i<talk.speakers.length; i++) {
-        var speaker = talk.speakers[i];
-        html += '<div class="speaker-name">'+speaker.name+'</div>';
-        html += '<p>'+speaker.bio+'</p>';
-    }
-    html += '</div>';
-    html += '</div>';
+    html += '<div class="description">'+talk.description+'</div>';
     // footer
     html += '</div>';
     html += '<div class="cleared"></div>';

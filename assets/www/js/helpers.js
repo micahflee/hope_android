@@ -1,3 +1,9 @@
+function init() {
+    data.load();
+    favorites.load();
+    filter.load();
+}
+
 function bind_talk_callbacks() {
     for(var i=0; i<data.talks().length; i++) {
         talk = data.talks()[i];

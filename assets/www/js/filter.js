@@ -34,4 +34,3 @@ var filter = {
         }
     }
 }
-filter.load();

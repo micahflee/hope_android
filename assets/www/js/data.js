@@ -1,9 +1,12 @@
 var data = {
-    d : eval('('+window.JSInterface.getScheduleJSON()+')'),
+    d : null, 
+    load : function() {
+        data.d = eval('('+window.JSInterface.getScheduleJSON()+')');
+    },
     numberOfTalks : function() {
-      return data.d.length;
+        return data.d.length;
     },
     talks : function() {
-      return data.d;
+        return data.d;
     }
 }

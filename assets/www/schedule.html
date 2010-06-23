@@ -9,12 +9,21 @@
 <script type="text/javascript" src="js/helpers.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        filter.filter_func = function(talk) {
-            if(filter.filter == 'all')
-                return true;
-            return (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
-        };
-        display_talks();
+        // for some reason loading screen won't display if we don't wait 1/10 of a second first
+        window.setTimeout(function() {
+            // load all the content
+            init();
+            
+            // define the filter function
+            filter.filter_func = function(talk) {
+                if(filter.filter == 'all')
+                    return true;
+                return (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
+            };
+            
+            // display the talks, filtering w/ above function
+            display_talks();
+        }, 100);
     });
 </script>
 </head>

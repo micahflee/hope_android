@@ -9,6 +9,33 @@
 <script type="text/javascript" src="js/helpers.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        // for some reason loading screen won't display if we don't wait 1/10 of a second first
+        window.setTimeout(function() {
+            // load all the content
+            init();
+            
+            // only display talks if there are any favorites
+            if(favorites.count() > 0) {
+                // define the filter function
+                filter.filter_func = function(talk) {
+                    if(!favorites.isFavorite(talk.id))
+                        return false;
+                    if(filter.filter == 'all')
+                        return true;
+                    return (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
+                };
+                
+                // display the talks, filtering w/ above function
+                display_talks();
+            }
+            // otherwise display instructions
+            else {
+                $("#content").html('<p class="only">You have not favorited any talks yet. Tap the stars next to talks in the schedule to keep track of the talks that you\'re interested in.</p>');
+            }
+        }, 100);
+
+    
+        init();
         if(favorites.count() > 0) {
             filter.filter_func = function(talk) {
                 if(!favorites.isFavorite(talk.id))

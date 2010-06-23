@@ -48,4 +48,3 @@ var favorites = {
         }
     }
 };
-favorites.load();

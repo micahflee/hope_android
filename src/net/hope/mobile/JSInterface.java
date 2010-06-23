@@ -20,6 +20,7 @@ public class JSInterface {
 	private Context context;
 	private String prefJSON;
 	private String prefFavorites;
+	private String prefFilter;
 	private long lastDownloadedJSON = 0;
 	
 	public JSInterface(Context c) {
@@ -29,14 +30,15 @@ public class JSInterface {
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
 		prefJSON = settings.getString("json", "{}");
 		prefFavorites = settings.getString("favorites", "");
+		prefFilter = settings.getString("filter", "all");
 	}
 	
 	public String getScheduleJSON() {
-		// if it's been less than 1 minute since the last json pull, just return the stored value
+		// if it's been less than 5 minutes since the last json pull, just return the stored value
 		long timeDiff = System.currentTimeMillis() - lastDownloadedJSON;
 		if(timeDiff < 300000) {
-			int seconds = (int)(timeDiff / 1000);
-			Toast.makeText(context, "Downloaded schedule "+seconds+" seconds ago", Toast.LENGTH_SHORT).show();
+			//int seconds = (int)(timeDiff / 1000);
+			//Toast.makeText(context, "Downloaded schedule "+seconds+" seconds ago", Toast.LENGTH_SHORT).show();
 			return prefJSON;
 		}
 		
@@ -63,7 +65,7 @@ public class JSInterface {
     		return prefJSON;
     	}
     	
-    	// downloaded new json successfully, now save it
+    	// downloaded new json successfully, now save it and return it
     	lastDownloadedJSON = System.currentTimeMillis();
     	prefJSON = scheduleJSON;
     	SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
@@ -82,7 +84,19 @@ public class JSInterface {
 		prefFavorites = favorites;
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putString("favorites", prefFavorites);
+		editor.putString("favorites", prefFavorites); 
+		editor.commit();
+	}
+	
+	public String getFilter() {
+		return prefFilter;
+	}
+	
+	public void saveFilter(String filter) {
+		prefFilter = filter;
+		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString("filter", prefFilter); 
 		editor.commit();
 	}
 }

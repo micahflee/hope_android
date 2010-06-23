@@ -5,23 +5,21 @@
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/data.js"></script>
 <script type="text/javascript" src="js/favorites.js"></script>
+<script type="text/javascript" src="js/filter.js"></script>
 <script type="text/javascript" src="js/helpers.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         if(favorites.count() > 0) {
-            // display just the favorited talks talks
-            var html = '';
-            for(var i=0; i<data.talks().length; i++) {
-                var talk = data.talks()[i];
-                if(favorites.isFavorite(talk.id))
-                    html += display_talk(talk);
-            }
-            $("#content").html(html);
-            
-            // bind stuff
-            bind_talk_callbacks();
+            filter.filter_func = function(talk) {
+                if(!favorites.isFavorite(talk.id))
+                    return false;
+                if(filter.filter == 'all')
+                    return true;
+                return (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
+            };
+            display_talks();
         } else {
-            $("#content").html('<p>You have not favorited any talks yet. Tap the stars next to talks in the schedule to keep track of the talks that you\'re interested in.</p>');
+            $("#content").html('<p class="only">You have not favorited any talks yet. Tap the stars next to talks in the schedule to keep track of the talks that you\'re interested in.</p>');
         }
     });
 </script>
@@ -30,7 +28,7 @@
 <body>
     <div id="wrapper">
         <h1>Favorites</h1>
-        <div id="content"></div>
+        <div id="content"><img src="images/loading.jpg"></div>
     </div>
 </body>
 </html>

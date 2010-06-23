@@ -16,10 +16,27 @@ body {
 h1 {
     text-align: center;
     font-weight: bold;
-    font-size: 20px;
-    margin: 0;
-    padding: 5px 0;
+    font-size: 24px;
+    padding: 5px 0 0 0;
     color: #FFD02F;
+}
+
+#filter {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    font-size: arial;
+    color: #396c2f;
+    border-bottom: 2px solid #FFD02F;
+    border-top: 2px solid #FFD02F;
+    padding: 5px 0;
+}
+
+#filter span {
+}
+
+#filter .current {
+    color: #49b733;
 }
 
 .talk {
@@ -66,6 +83,23 @@ h1 {
 .talk .description {
     display: none;
     margin-top: 5px;
+}
+
+.talk .speaker-details-button {
+    color: #b1e8a6;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.talk .speaker-details {
+    display: none;
+    margin-top: 5px;
+    color: #e0e0e0;
+}
+
+.talk .speaker-details .speaker-name {
+    font-weight: bold;
+    color: #efefef;
 }
 
 .cleared {

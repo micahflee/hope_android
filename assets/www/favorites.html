@@ -3,13 +3,12 @@
 <title>Favorites</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/data.js"></script>
 <script type="text/javascript" src="js/favorites.js"></script>
 <script type="text/javascript" src="js/helpers.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        if(favorites.count > 0) {
+        if(favorites.count() > 0) {
             // display just the favorited talks talks
             var html = '';
             for(var i=0; i<data.talks().length; i++) {

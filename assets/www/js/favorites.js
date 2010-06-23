@@ -1,14 +1,12 @@
 var favorites = {
-    ids : null,
+    ids : new Array(),
     load : function() {
-        if($.cookie('favorites') != null) {
-            favorites.ids = $.cookie('favorites').split(",");
-        } else {
-            favorites.ids = new Array();
-        }
+        var favorites = window.JSInterface.getFavorites();
+        if(favorites != "")
+            ids = favorites.split(",");
     },
     save : function() {
-        $.cookie('favorites', favorites.ids.toString());
+        window.JSInterface.saveFavorites(favorites.ids.toString());
     },
     isFavorite : function(id) {
         for(var i=0; i<favorites.ids.length; i++) {
@@ -36,5 +34,5 @@ var favorites = {
             favorites.save();
         }
     }
-}
+};
 favorites.load();

@@ -27,26 +27,25 @@ public class TheNextHOPE extends Activity {
         scheduleButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		webview.loadUrl("file:///android_asset/www/schedule.html");
-        		Toast.makeText(getBaseContext(), "Loading Schedule", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getBaseContext(), "Loading Schedule", Toast.LENGTH_SHORT).show();
         	}
         });
         favoritesButton = (Button) findViewById(R.id.favoritesButton);
         favoritesButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		webview.loadUrl("file:///android_asset/www/favorites.html");
-        		Toast.makeText(getBaseContext(), "Loading Favorites", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getBaseContext(), "Loading Favorites", Toast.LENGTH_SHORT).show();
         	}
         });
         iaciendaButton= (Button) findViewById(R.id.iaciendaButton);
         iaciendaButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		Toast.makeText(getBaseContext(), "Coming Soon", Toast.LENGTH_LONG).show();
+        		Toast.makeText(getBaseContext(), "Iacienda Coming Soon", Toast.LENGTH_SHORT).show();
         	}
         });
         
         // initialize the web view
-        JSInterface jsInterface = new JSInterface();
-        jsInterface.context = getBaseContext();
+        JSInterface jsInterface = new JSInterface(getBaseContext());
         webview = (WebView) findViewById(R.id.webview);
         webview.getSettings().setAllowFileAccess(true);
         webview.getSettings().setJavaScriptEnabled(true);
@@ -58,6 +57,9 @@ public class TheNextHOPE extends Activity {
         	public boolean shouldOverrideUrlLoading(WebView view, String url) {
         		view.loadUrl(url);
         		return true;
+        	}
+        	public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        		Toast.makeText(getBaseContext(), "Oh no! "+description, Toast.LENGTH_SHORT).show();
         	}
         });
         webview.loadUrl("file:///android_asset/www/schedule.html");

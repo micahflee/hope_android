@@ -1,12 +1,37 @@
 <html>
 <head>
 <title>Favorites</title>
-<script language="javascript" src="js/jquery-1.4.2.min.js"></script>
-<script language="javascript"></script>
 <link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/data.js"></script>
+<script type="text/javascript" src="js/favorites.js"></script>
+<script type="text/javascript" src="js/helpers.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        if(favorites.count > 0) {
+            // display just the favorited talks talks
+            var html = '';
+            for(var i=0; i<data.talks().length; i++) {
+                var talk = data.talks()[i];
+                if(favorites.isFavorite(talk.id))
+                    html += display_talk(talk);
+            }
+            $("#content").html(html);
+            
+            // bind stuff
+            bind_talk_callbacks();
+        } else {
+            $("#content").html('<p>You have not favorited any talks yet. Tap the stars next to talks in the schedule to keep track of the talks that you\'re interested in.</p>');
+        }
+    });
+</script>
 </head>
 
 <body>
-    <h1>Favorites!</h1>
+    <div id="wrapper">
+        <h1>Favorites</h1>
+        <div id="content"></div>
+    </div>
 </body>
 </html>

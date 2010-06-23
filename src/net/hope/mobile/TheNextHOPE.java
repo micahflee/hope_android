@@ -1,23 +1,12 @@
 package net.hope.mobile;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -55,59 +44,22 @@ public class TheNextHOPE extends Activity {
         	}
         });
         
-        /*// try loading and reading file
-        FileInputStream fIn = null; 
-        InputStreamReader isr = null;
-        char[] inputBuffer = new char[255]; 
-        String data = null;
-        try{
-        	fIn = openFileInput(SCHEDULE_FILENAME);
-        	isr = new InputStreamReader(fIn); 
-        	isr.read(inputBuffer); 
-        	data = new String(inputBuffer);
-        } 
-        catch (Exception e) {       
-        	e.printStackTrace(); 
-        } 
-        finally { 
-        	try { 
-        		isr.close(); 
-        		fIn.close(); 
-        	} catch (IOException e) { 
-        		e.printStackTrace(); 
-        	} 
-        }
-        Toast.makeText(getBaseContext(), data, Toast.LENGTH_LONG).show();
-        
-        // try saving a file
-        String fakeJSON = "document.innerHTML = '<h1>just a test</h1>';";
-        FileOutputStream fOut = null;
-        OutputStreamWriter osw = null;
-        try{
-        	fOut = openFileOutput(SCHEDULE_FILENAME, MODE_PRIVATE);      
-        	osw = new OutputStreamWriter(fOut);
-        	osw.write(fakeJSON);
-        	osw.flush();
-        }
-        catch (Exception e) {      
-        	e.printStackTrace();
-        }
-        finally {
-        	try {
-        		osw.close();
-        		fOut.close();
-        	} catch (IOException e) {
-        		e.printStackTrace();
-        	}
-        }*/
-        
         // initialize the web view
         JSInterface jsInterface = new JSInterface();
         jsInterface.context = getBaseContext();
         webview = (WebView) findViewById(R.id.webview);
         webview.getSettings().setAllowFileAccess(true);
         webview.getSettings().setJavaScriptEnabled(true);
+        webview.setFocusable(true);
+        webview.setFocusableInTouchMode(false);
         webview.addJavascriptInterface(jsInterface, "JSInterface");
+        webview.setWebViewClient(new WebViewClient() {  
+        	@Override
+        	public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        		view.loadUrl(url);
+        		return true;
+        	}
+        });
         webview.loadUrl("file:///android_asset/www/schedule.html");
     }
     

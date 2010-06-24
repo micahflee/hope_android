@@ -1,5 +1,12 @@
-This is the Android app I'm making for the Hackers on Planet Earth conference for 2010. It should be about the same as the iPhone app I'm making. It will mainly be used to easily keep track of the HOPE schedule, and maybe other things.
+This is the Android app I'm making for the Hackers on Planet Earth conference for 2010. It's designed to display the HOPE schedule and make it easy to keep track of talks you want to attend.
 
-I'm primarily going to write it in Javascript, HTML, and CSS, and just render it in a webview.
+Most of the logic happens in a webview widget, so it's written in Javascript, HTML, and CSS. The rest is written in Java with the Android SDK.
 
+Data gets pulled from a server running this web application:
+http://github.com/micahflee/hope_schedule
+
+iPhone version of this app is here: 
+http://github.com/micahflee/hope_iphone
+
+The Next HOPE conference:
 http://www.thenexthope.org/

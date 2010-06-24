@@ -22,7 +22,7 @@ var filter = {
         html += '<span id="day-all" filter="all">All</span>';
         html += '</p>';
         if (filter.query) {
-            html += '<p id="query">';
+            html += '<p id="query" class="only">';
             // FIXME: escape query
             html += 'Searching for <strong id="filter_query">';
             html += Util.escape_html(filter.query);

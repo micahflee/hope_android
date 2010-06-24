@@ -106,6 +106,9 @@ public class TheNextHOPE extends Activity {
         case R.id.menu_search:
             onSearchRequested();
             return true;
+        case R.id.menu_quit:
+        	this.finish();
+        	return true;
         }
         return super.onOptionsItemSelected(item);
     }

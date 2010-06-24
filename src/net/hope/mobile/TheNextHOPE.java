@@ -8,6 +8,9 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -86,6 +89,25 @@ public class TheNextHOPE extends Activity {
 
         Log.d(LOG_TAG, url.toString());
         webview.loadUrl(url.toString());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+        case R.id.menu_search:
+            onSearchRequested();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public boolean isOnline() {

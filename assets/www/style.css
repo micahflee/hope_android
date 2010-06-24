@@ -93,10 +93,14 @@ p#force-download {
     -webkit-border-radius: 10px;
 }
 
-.talk .fav {
+.talk .icons {
     width: 40px;
     float: left;
     margin-right: 5px;
+}
+
+.talk .icons img {
+    margin-bottom: 5px;
 }
 
 .talk .content {

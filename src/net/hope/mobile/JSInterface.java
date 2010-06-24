@@ -8,14 +8,22 @@ import java.net.URI;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 public class JSInterface {
 	public static final String PREFS_NAME = "TheNextHOPEPrefs";
 	public static final String SCHEDULE_JSON_URL = "http://www.thenexthope.org/hope_schedule/json.php";
+        private static final String LOG_TAG = "JSInterface";
+        // not all events are the same length, but most are and our
+        // schedule JSON does't appear to tell us which ones aren't.
+        private static final long EVENT_LENGTH = 3300000; // 55 minutes
 	
 	private Context context;
 	private String prefJSON;
@@ -105,4 +113,28 @@ public class JSInterface {
 		editor.putString("filter", prefFilter); 
 		editor.commit();
 	}
+
+    // for some reason, the event intents are severely under-documented; see
+    // http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob;f=core/java/android/provider/Calendar.java
+    // for hints
+       public void addToCalendar(String eventJson) {
+           try {
+               JSONObject event = new JSONObject(eventJson);
+               long startTime = event.getInt("timestamp") * 1000L;
+
+               Intent intent = new Intent(Intent.ACTION_EDIT);
+               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+               intent.setType("vnd.android.cursor.item/event");
+               intent.putExtra("beginTime", startTime);
+               intent.putExtra("endTime", startTime + EVENT_LENGTH);
+               intent.putExtra("title", event.getString("title"));
+               intent.putExtra("description", event.getString("description"));
+               intent.putExtra("eventLocation", event.getString("location"));
+               context.startActivity(intent);
+           } catch (JSONException e) {
+               Log.e(LOG_TAG, "couldn't parse calendar JSON " + eventJson.length() + "|" + eventJson + "|");
+               Log.e(LOG_TAG, e.toString());
+               return;
+           }
+       }
 }

@@ -11,5 +11,14 @@ var data = {
     },
     talks : function() {
         return data.d;
+    },
+    talk_by_id : function(wanted) {
+        var i, n = data.d.length;
+        for(i = 0; i < n; ++i) {
+          var talk = data.d[i];
+          if (talk.id == wanted)
+            return talk;
+        }
+        return undefined;
     }
-}
+};

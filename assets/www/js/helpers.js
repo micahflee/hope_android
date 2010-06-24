@@ -15,15 +15,21 @@ function bind_talk_callbacks() {
   });
 
   $(".fav").click(function() {
-    var img = $("img", this);
-    var talk_id = img.attr('talk_id');
+    var $this = $(this);
+    var talk_id = $this.attr('talk_id');
     if(favorites.isFavorite(talk_id)) {
-      img.attr('src', 'images/fav_off.png');
+      $this.attr('src', 'images/fav_off.png');
       favorites.remove(talk_id);
     } else {
-      img.attr('src', 'images/fav_on.png');
+      $this.attr('src', 'images/fav_on.png');
       favorites.add(talk_id);
     }
+  });
+  
+  $(".cal").click(function() {
+    var $this = $(this);
+    var talk_id = $this.attr('talk_id');
+    window.JSInterface.addToCalendar(JSON.stringify(data.talk_by_id(talk_id)));
   });
 }
 
@@ -74,12 +80,13 @@ function favimg(id) {
 
 function display_talk(talk) {
     var i;
-    html = '';
+    var html = '';
     html += '<div class="talk" id="talk'+talk.id+'">';
     
     // favorite image
     var img_src = favimg(talk.id);
-    html += '<div class="fav"><img src="images/'+img_src+'" talk_id="'+talk.id+'" /></div>';
+    html += '<div class="icons"><img class="fav" src="images/'+img_src+'" talk_id="'+talk.id+'" /><br/>';
+    html += '<img src="images/cal.png" class="cal" talk_id="'+talk.id+'" /></div>';
     html += '<div class="content" talk_id="'+talk.id+'">';
     // title
     html += '<div class="title">'+talk.title+'</div>';

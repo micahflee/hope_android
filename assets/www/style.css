@@ -131,3 +131,13 @@ p#force-download {
 .cleared {
     clear: both;
 }
+
+#query {
+    color: #FFD02F;
+    text-align: center;
+}
+
+#query a {
+    color: inherit;
+    text-decoration: underline;
+}

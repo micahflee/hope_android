@@ -1,15 +1,42 @@
 <html>
 <head>
 <title>Schedule</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/data.js"></script>
+<script type="text/javascript" src="js/favorites.js"></script>
+<script type="text/javascript" src="js/filter.js"></script>
+<script type="text/javascript" src="js/helpers.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // for some reason loading screen won't display if we don't wait 1/10 of a second first
+        window.setTimeout(function() {
+            // load all the content
+            init();
+            
+            // define the filter function
+            filter.filter_func = function(talk) {
+                if(filter.filter == 'all')
+                    return true;
+                return (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
+            };
+            
+            // display the talks, filtering w/ above function
+            display_talks();
+            
+            $("#content").show(400);
+            $("#loading").hide(100);
+        }, 100);
+    });
+</script>
 </head>
 
-<body>
-<h1>Schedule!</h1>
-<div id="test">just a test 8</div>
-
-<script language="javascript">
-    document.getElementById("test").innerHTML = 'before';
-    document.getElementById("test").innerHTML = window.JSInterface.getScheduleJSON();
-</script>
+<body id="body">
+    <script type="text/javascript">random_background();</script>
+    <div id="wrapper">
+        <h1>Hackers on Planet Earth<br/>SCHEDULE</h1>
+        <div id="content"></div>
+        <div id="loading"><img src="images/loading.png"></div>
+    </div>
 </body>
 </html>

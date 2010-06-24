@@ -27,14 +27,14 @@ public class TheNextHOPE extends Activity {
         scheduleButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		webview.loadUrl("file:///android_asset/www/schedule.html");
-        		Toast.makeText(getBaseContext(), "Loading Schedule", Toast.LENGTH_SHORT).show();
+        		//Toast.makeText(getBaseContext(), "Loading Schedule", Toast.LENGTH_SHORT).show();
         	}
         });
         favoritesButton = (Button) findViewById(R.id.favoritesButton);
         favoritesButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
         		webview.loadUrl("file:///android_asset/www/favorites.html");
-        		Toast.makeText(getBaseContext(), "Loading Favorites", Toast.LENGTH_SHORT).show();
+        		//Toast.makeText(getBaseContext(), "Loading Favorites", Toast.LENGTH_SHORT).show();
         	}
         });
         /*iaciendaButton= (Button) findViewById(R.id.iaciendaButton);

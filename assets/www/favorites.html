@@ -32,30 +32,20 @@
             else {
                 $("#content").html('<p class="only">You have not favorited any talks yet. Tap the stars next to talks in the schedule to keep track of the talks that you\'re interested in.</p>');
             }
+            
+            $("#content").show(400);
+            $("#loading").hide(100);
         }, 100);
-
-    
-        init();
-        if(favorites.count() > 0) {
-            filter.filter_func = function(talk) {
-                if(!favorites.isFavorite(talk.id))
-                    return false;
-                if(filter.filter == 'all')
-                    return true;
-                return (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
-            };
-            display_talks();
-        } else {
-            $("#content").html('<p class="only">You have not favorited any talks yet. Tap the stars next to talks in the schedule to keep track of the talks that you\'re interested in.</p>');
-        }
     });
 </script>
 </head>
 
-<body>
+<body id="body">
+    <script type="text/javascript">random_background();</script>
     <div id="wrapper">
-        <h1>Favorites</h1>
-        <div id="content"><img src="images/loading.jpg"></div>
+        <h1>Hackers on Planet Earth<br/>FAVORITES</h1>
+        <div id="content"></div>
+        <div id="loading"><img src="images/loading.png"></div>
     </div>
 </body>
 </html>

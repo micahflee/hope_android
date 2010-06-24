@@ -33,13 +33,15 @@ public class JSInterface {
 		prefFilter = settings.getString("filter", "all");
 	}
 	
-	public String getScheduleJSON() {
+	public String getScheduleJSON(boolean forceDownload) {
 		// if it's been less than 5 minutes since the last json pull, just return the stored value
-		long timeDiff = System.currentTimeMillis() - lastDownloadedJSON;
-		if(timeDiff < 300000) {
-			//int seconds = (int)(timeDiff / 1000);
-			//Toast.makeText(context, "Downloaded schedule "+seconds+" seconds ago", Toast.LENGTH_SHORT).show();
-			return prefJSON;
+		if(!forceDownload) {
+			long timeDiff = System.currentTimeMillis() - lastDownloadedJSON;
+			if(timeDiff < 300000) {
+				//int seconds = (int)(timeDiff / 1000);
+				//Toast.makeText(context, "Downloaded schedule "+seconds+" seconds ago", Toast.LENGTH_SHORT).show();
+				return prefJSON;
+			}
 		}
 		
 		// try downloading file
@@ -61,17 +63,21 @@ public class JSInterface {
         	scheduleJSON = sb.toString();
     	} catch (Exception e) {
     		// failed to download, so let's just return what we've got
-    		Toast.makeText(context, "Used stored schedule", Toast.LENGTH_SHORT).show();
+    		lastDownloadedJSON = System.currentTimeMillis();
+    		if(prefJSON == "{ }")
+    			Toast.makeText(context, "Could not download schedule, check your internet connection", Toast.LENGTH_SHORT).show();
+    		else
+    			Toast.makeText(context, "Using stored schedule", Toast.LENGTH_SHORT).show();
     		return prefJSON;
     	}
     	
     	// downloaded new json successfully, now save it and return it
-    	lastDownloadedJSON = System.currentTimeMillis();
     	prefJSON = scheduleJSON;
     	SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString("json", prefJSON);
 		editor.commit();
+		lastDownloadedJSON = System.currentTimeMillis();
 		Toast.makeText(context, "Downloaded latest schedule", Toast.LENGTH_SHORT).show();
 		return prefJSON;
 	}

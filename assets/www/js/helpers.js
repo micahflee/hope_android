@@ -1,3 +1,8 @@
+function random_background() {
+    var random_number = Math.floor(Math.random()*4)+1;
+    $("#body").css('background-image', 'url("images/background'+random_number+'.jpg")');
+}
+
 function init() {
     data.load();
     favorites.load();
@@ -112,7 +117,13 @@ function display_talks() {
     
     if(!data.talks().length) {
         html += '<p class="only">It looks like you don\'t have the schedule downloaded yet. You must open this app while connected to the internet at least once to download the schedule.</p>';
+        html += '<p id="force-download">Force Schedule Download Attempt</p>';
         $("#content").html(html);
+        
+        $("#force-download").bind('click', function() {
+            data.load_force();
+            display_talks();
+        });
         return;
     }
     

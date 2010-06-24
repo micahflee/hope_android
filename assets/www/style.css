@@ -6,6 +6,10 @@ html, body {
 body {
     color: #ffffff;
     background-color: #000000;
+    background-image: url("images/background1.jpg");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
     font-family: courier;
 }
 
@@ -13,17 +17,51 @@ body {
     width:300px;
 }
 
+#content {
+    display: none;
+}
+
+#loading {
+    text-align: center;
+}
+
+#loading img {
+    margin-top: 150px;
+}
+
 h1 {
     text-align: center;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 19px;
     padding: 5px 0 0 0;
+    margin: 0;
     color: #FFD02F;
 }
 
 p.only {
-    margin: 30px;
+    margin: 15px;
+    padding: 20px;
+    background-color: #000000;
+    -webkit-border-radius: 20px;
+    opacity: 0.8;
+    text-align: center;
+    margin-top: 20px;
 }
+
+p#force-download {
+    margin: 15px;
+    padding: 10px;
+    color: #4ee630;
+    background-color: #333333;
+    border: solid 2px #4ee630;
+    -webkit-border-radius: 20px;
+    opacity: 0.8;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
 
 #filter {
     text-align: center;
@@ -50,6 +88,7 @@ p.only {
     margin-bottom: 5px;
     padding: 5px;
     background-color: #111111;
+    opacity: 0.8;
     border: 1px solid #333333;
     -webkit-border-radius: 10px;
 }

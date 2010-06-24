@@ -10,30 +10,21 @@ function init() {
 }
 
 function bind_talk_callbacks() {
-    for(var i=0; i<data.talks().length; i++) {
-        talk = data.talks()[i];
-        
-        // bind description show/hide
-        $("#talk"+talk.id+" .content").toggle(function() {
-            var talk_id = $(this).attr('talk_id');
-            $(".description", this).show(200);
-        }, function() {
-            var talk_id = $(this).attr('talk_id');
-            $(".description", this).hide(200);
-        });
-        
-        // bind favorites/unfavorite
-        $("#talk"+talk.id+" .fav").bind('click', function() {
-            var talk_id = $("img", this).attr('talk_id');
-            if(favorites.isFavorite(talk_id)) {
-                $("img", this).attr('src', 'images/fav_off.png');
-                favorites.remove(talk_id);
-            } else {
-                $("img", this).attr('src', 'images/fav_on.png');
-                favorites.add(talk_id);
-            }
-        });
+  $(".content").click(function() {
+    $(".description", this).toggle(200);
+  });
+
+  $(".fav").click(function() {
+    var img = $("img", this);
+    var talk_id = img.attr('talk_id');
+    if(favorites.isFavorite(talk_id)) {
+      img.attr('src', 'images/fav_off.png');
+      favorites.remove(talk_id);
+    } else {
+      img.attr('src', 'images/fav_on.png');
+      favorites.add(talk_id);
     }
+  });
 }
 
 function formatted_date(timestamp) {

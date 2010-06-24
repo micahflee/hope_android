@@ -1,8 +1,14 @@
 var filter = {
     filter : 'all',
+    query : null,
     filter_func : function(talk) { return true; },
     load : function() {
         filter.filter = window.JSInterface.getFilter();
+        var q = $.jqURL.get('q');
+        if (q) {
+          filter.query = decodeURI(q);
+          filter.querylc = filter.query.toLowerCase();
+        }
     },
     save : function() {
         window.JSInterface.saveFilter(filter.filter);
@@ -15,6 +21,16 @@ var filter = {
         html += '<span id="day-sunday" filter="sunday">Sunday</span> ';
         html += '<span id="day-all" filter="all">All</span>';
         html += '</p>';
+        if (filter.query) {
+            html += '<p id="query">';
+            // FIXME: escape query
+            html += 'Searching for <strong id="filter_query">';
+            html += Util.escape_html(filter.query);
+            html += '</strong>';
+            html += '<br />';
+            html += '<a href="#" id="clear_query">Clear Search</a>';
+            html += '</p>';
+        }
         return html;
     },
     bind_callbacks : function() {
@@ -32,5 +48,10 @@ var filter = {
                 display_talks(filter.filter_func);
             });
         }
+        $("#clear_query").click(function() {
+            filter.query = null;
+            $("#query").remove();
+            display_talks(filter.filter_func);
+        });
     }
 }

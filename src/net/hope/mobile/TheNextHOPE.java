@@ -1,9 +1,13 @@
 package net.hope.mobile;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -15,6 +19,8 @@ public class TheNextHOPE extends Activity {
 	private Button scheduleButton;
 	private Button favoritesButton;
 	//private Button iaciendaButton;
+
+    private static final String LOG_TAG = "TheNextHOPE";
 	
     /** Called when the activity is first created. */
     @Override
@@ -62,9 +68,26 @@ public class TheNextHOPE extends Activity {
         		Toast.makeText(getBaseContext(), "Oh no! "+description, Toast.LENGTH_SHORT).show();
         	}
         });
-        webview.loadUrl("file:///android_asset/www/schedule.html");
+
+        onNewIntent(getIntent());
     }
-    
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        StringBuilder url = new StringBuilder("file:///android_asset/www/schedule.html");
+
+        if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
+            String query=intent.getStringExtra(SearchManager.QUERY);
+            if (query != null) {
+                url.append("?q=");
+                url.append(Uri.encode(query.trim()));
+            }
+        }
+
+        Log.d(LOG_TAG, url.toString());
+        webview.loadUrl(url.toString());
+    }
+
     public boolean isOnline() {
     	ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
     	return cm.getActiveNetworkInfo().isConnected();

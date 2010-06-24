@@ -3,6 +3,8 @@
 <title>Schedule</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jqurl.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
 <script type="text/javascript" src="js/data.js"></script>
 <script type="text/javascript" src="js/favorites.js"></script>
 <script type="text/javascript" src="js/filter.js"></script>
@@ -16,14 +18,21 @@
             
             // define the filter function
             filter.filter_func = function(talk) {
+                var dayMatches;
                 if(filter.filter == 'all')
-                    return true;
-                return (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
+                    dayMatches = true;
+                else
+                    dayMatches = (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
+
+                if (filter.query) {
+                    return dayMatches && (Util.talk_concat(talk).indexOf(filter.querylc) >= 0)
+                } else {
+                    return dayMatches;
+                }
             };
             
             // display the talks, filtering w/ above function
             display_talks();
-            
             $("#content").show(400);
             $("#loading").hide(100);
         }, 100);

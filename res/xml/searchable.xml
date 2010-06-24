@@ -1,0 +1,6 @@
+<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+   android:label="@string/app_name"
+   android:hint="Search HOPE Schedule"
+   android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+   android:voiceLanguage="en"
+/>

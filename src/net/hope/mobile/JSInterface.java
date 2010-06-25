@@ -16,6 +16,7 @@ import android.widget.Toast;
 public class JSInterface {
 	public static final String PREFS_NAME = "TheNextHOPEPrefs";
 	public static final String SCHEDULE_JSON_URL = "http://www.thenexthope.org/hope_schedule/json.php";
+	public static final String NOTICE_JSON_URL = "http://www.thenexthope.org/hope_schedule/notice_json.php";
 	
 	private Context context;
 	private String prefJSON;
@@ -80,6 +81,30 @@ public class JSInterface {
 		lastDownloadedJSON = System.currentTimeMillis();
 		Toast.makeText(context, "Downloaded latest schedule", Toast.LENGTH_SHORT).show();
 		return prefJSON;
+	}
+	
+	public String getNoticeJSON() {
+		// try downloading file
+    	String noticeJSON = "";
+    	try {
+    		DefaultHttpClient client = new DefaultHttpClient();
+    		URI uri = new URI(NOTICE_JSON_URL);
+    		HttpGet method = new HttpGet(uri);
+    		HttpResponse res = client.execute(method);
+    		InputStream data = res.getEntity().getContent();
+    		InputStreamReader reader = new InputStreamReader(data);
+        	BufferedReader buffer = new BufferedReader(reader);
+        	StringBuilder sb = new StringBuilder();
+        	String cur;
+    		while ((cur = buffer.readLine()) != null) {
+    			sb.append(cur + "\n");
+    		}
+    		data.close();
+    		noticeJSON = sb.toString();
+    	} catch (Exception e) {
+    		return "{ \"didNotLoad\" : true }";
+    	}
+    	return noticeJSON;
 	}
 	
 	public String getFavorites() {

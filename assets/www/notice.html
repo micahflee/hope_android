@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Favorites</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jsinterface.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/helpers.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // for some reason loading screen won't display if we don't wait 1/10 of a second first
+        window.setTimeout(function() {
+            var html = '<p class="only">';
+            var notice = eval('('+window.JSInterface.getNoticeJSON()+')');
+            if(notice.didNotLoad) {
+                html += 'Unable to load a notice at this time. Check your internet connection.';
+            } else {
+                if(notice.notice == '') {
+                    html += 'There is no notice at this time.';
+                } else {
+                    html += notice.notice;
+                }
+            }
+            html += '</p>';
+            $("#content").html(html);
+            
+            $("#content").show(400);
+            $("#loading").hide(100);
+        }, 100);
+    });
+</script>
+</head>
+
+<body id="body">
+    <script type="text/javascript">random_background();</script>
+    <div id="wrapper">
+        <h1>Hackers on Planet Earth<br/>NOTICE</h1>
+        <div id="content"></div>
+        <div id="loading"><img src="images/loading.png"></div>
+    </div>
+</body>
+</html>

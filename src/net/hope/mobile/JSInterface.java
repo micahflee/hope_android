@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,9 +15,12 @@ import org.json.JSONException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.util.Log;
 import android.widget.Toast;
 
+/** Functions which can be called from JavaScript. */
 public class JSInterface {
 	public static final String PREFS_NAME = "TheNextHOPEPrefs";
 	public static final String SCHEDULE_JSON_URL = "http://www.thenexthope.org/hope_schedule/json.php";
@@ -41,6 +45,11 @@ public class JSInterface {
 		prefFilter = settings.getString("filter", "all");
 	}
 	
+        /** retrieve the schedule from the internet
+         * @param forceDownload true if the schedule must be
+         *                      re-downloaded even if we've fetched it
+         *                      recently
+         * @return a JSON string */
 	public String getScheduleJSON(boolean forceDownload) {
 		// if it's been less than 5 minutes since the last json pull, just return the stored value
 		if(!forceDownload) {
@@ -90,10 +99,14 @@ public class JSInterface {
 		return prefJSON;
 	}
 	
+        /** get the user's favorites
+         * @return whatever was last passed to saveFavorites */
 	public String getFavorites() {
 		return prefFavorites;
 	}
 	
+        /** save the user's favorites
+         * @param favorites a String of some sort, which will be stored */
 	public void saveFavorites(String favorites) {
 		prefFavorites = favorites;
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
@@ -117,7 +130,10 @@ public class JSInterface {
     // for some reason, the event intents are severely under-documented; see
     // http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob;f=core/java/android/provider/Calendar.java
     // for hints
-       public void addToCalendar(String eventJson) {
+       /** add an event to device's calendar
+        * @param eventJson the event in question, represented as a JSON string
+        */
+        public void addToCalendar(String eventJson) {
            try {
                JSONObject event = new JSONObject(eventJson);
                long startTime = event.getInt("timestamp") * 1000L;
@@ -136,5 +152,21 @@ public class JSInterface {
                Log.e(LOG_TAG, e.toString());
                return;
            }
+       }
+
+       /**
+        * determine if we have a calendar on this device.  If this
+        * function returns false, then it is guaranteed that we will
+        * never call addToCalendar().
+        */
+       public boolean haveCalendar() {
+           PackageManager pm = context.getPackageManager();
+           Intent intent = new Intent(Intent.ACTION_EDIT);
+           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+           intent.setType("vnd.android.cursor.item/event");
+           intent.putExtra("beginTime", 1279296000); /* Jul 16 2010 noon EDT */
+           List<ResolveInfo> result = pm.queryIntentActivities(intent, 0);
+           Log.d(LOG_TAG, result.size() + " calendar editing activites found");
+           return result.size() > 0;
        }
 }

@@ -85,8 +85,11 @@ function display_talk(talk) {
     
     // favorite image
     var img_src = favimg(talk.id);
-    html += '<div class="icons"><img class="fav" src="images/'+img_src+'" talk_id="'+talk.id+'" /><br/>';
-    html += '<img src="images/cal.png" class="cal" talk_id="'+talk.id+'" /></div>';
+    html += '<div class="icons"><img class="fav" src="images/'+img_src+'" talk_id="'+talk.id+'" />';
+    if (Util.show_calendar()) {
+        html += '<br/><img src="images/cal.png" class="cal" talk_id="'+talk.id+'" />';
+    }
+    html += '</div>';
     html += '<div class="content" talk_id="'+talk.id+'">';
     // title
     html += '<div class="title">'+talk.title+'</div>';

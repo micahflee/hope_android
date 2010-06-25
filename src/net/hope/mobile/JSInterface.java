@@ -24,6 +24,7 @@ import android.widget.Toast;
 public class JSInterface {
 	public static final String PREFS_NAME = "TheNextHOPEPrefs";
 	public static final String SCHEDULE_JSON_URL = "http://www.thenexthope.org/hope_schedule/json.php";
+	public static final String NOTICE_JSON_URL = "http://www.thenexthope.org/hope_schedule/notice_json.php";
         private static final String LOG_TAG = "JSInterface";
         // not all events are the same length, but most are and our
         // schedule JSON does't appear to tell us which ones aren't.
@@ -99,8 +100,32 @@ public class JSInterface {
 		return prefJSON;
 	}
 	
-        /** get the user's favorites
-         * @return whatever was last passed to saveFavorites */
+	public String getNoticeJSON() {
+		// try downloading file
+    	String noticeJSON = "";
+    	try {
+    		DefaultHttpClient client = new DefaultHttpClient();
+    		URI uri = new URI(NOTICE_JSON_URL);
+    		HttpGet method = new HttpGet(uri);
+    		HttpResponse res = client.execute(method);
+    		InputStream data = res.getEntity().getContent();
+    		InputStreamReader reader = new InputStreamReader(data);
+        	BufferedReader buffer = new BufferedReader(reader);
+        	StringBuilder sb = new StringBuilder();
+        	String cur;
+    		while ((cur = buffer.readLine()) != null) {
+    			sb.append(cur + "\n");
+    		}
+    		data.close();
+    		noticeJSON = sb.toString();
+    	} catch (Exception e) {
+    		return "{ \"didNotLoad\" : true }";
+    	}
+    	return noticeJSON;
+	}
+	
+    /** get the user's favorites
+     * @return whatever was last passed to saveFavorites */
 	public String getFavorites() {
 		return prefFavorites;
 	}

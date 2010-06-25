@@ -35,5 +35,12 @@
 			android:text="Favorites"
 			android:layout_weight="1"
 			/>
+		<Button
+			android:id="@+id/noticeButton"
+			android:layout_width="0dip"
+			android:layout_height="fill_parent"
+			android:text="Notice"
+			android:layout_weight="1"
+			/>
 	</LinearLayout>
 </LinearLayout>

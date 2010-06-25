@@ -21,7 +21,7 @@ public class TheNextHOPE extends Activity {
 	private WebView webview;
 	private Button scheduleButton;
 	private Button favoritesButton;
-	//private Button iaciendaButton;
+	private Button noticeButton;
 
     private static final String LOG_TAG = "TheNextHOPE";
 	
@@ -46,12 +46,12 @@ public class TheNextHOPE extends Activity {
         		//Toast.makeText(getBaseContext(), "Loading Favorites", Toast.LENGTH_SHORT).show();
         	}
         });
-        /*iaciendaButton= (Button) findViewById(R.id.iaciendaButton);
-        iaciendaButton.setOnClickListener(new View.OnClickListener() {
+        noticeButton = (Button) findViewById(R.id.noticeButton);
+        noticeButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View v) {
-        		Toast.makeText(getBaseContext(), "Iacienda Coming Soon", Toast.LENGTH_SHORT).show();
+        		webview.loadUrl("file:///android_asset/www/notice.html");
         	}
-        });*/
+        });
         
         // initialize the web view
         JSInterface jsInterface = new JSInterface(getBaseContext());

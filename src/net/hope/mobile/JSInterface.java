@@ -52,12 +52,10 @@ public class JSInterface {
          *                      recently
          * @return a JSON string */
 	public String getScheduleJson(boolean forceDownload) {
-		// if it's been less than 5 minutes since the last json pull, just return the stored value
+		// if it's been less than 1 hour since the last json pull, just return the stored value
 		if(!forceDownload) {
 			long timeDiff = System.currentTimeMillis() - lastDownloadedJSON;
-			if(timeDiff < 300000) {
-				//int seconds = (int)(timeDiff / 1000);
-				//Toast.makeText(context, "Downloaded schedule "+seconds+" seconds ago", Toast.LENGTH_SHORT).show();
+			if(timeDiff < 3600000) {
 				return prefJson;
 			}
 		}

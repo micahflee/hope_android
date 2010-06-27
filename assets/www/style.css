@@ -83,7 +83,6 @@ p#force-download {
 
 .talk {
     width: 300px;
-    margin-bottom: 10px;
     font-size: 14px;
     margin-bottom: 5px;
     padding: 5px;
@@ -130,6 +129,20 @@ p#force-download {
 .talk .description {
     display: none;
     margin-top: 5px;
+}
+
+.talk .speaker-bios {
+}
+
+.talk .speaker-bio {
+    width: 243px;
+    margin-top: 5px;
+    font-size: 13px;
+    padding: 5px;
+    color: #a0a0a0;
+    background-color: #000000;
+    border: 1px solid #111111;
+    -webkit-border-radius: 10px;
 }
 
 .cleared {

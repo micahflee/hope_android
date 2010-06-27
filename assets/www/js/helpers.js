@@ -89,7 +89,7 @@ function displayTalk(talk) {
     if (Util.showCalendar()) {
         html += '<br/><img src="images/cal.png" class="cal" talkId="'+talk.id+'" />';
     }
-    html += '</div>';
+    html += '</div>'; // .icons
     html += '<div class="content" talkId="'+talk.id+'">';
     // title
     html += '<div class="title">'+talk.title+'</div>';
@@ -103,13 +103,22 @@ function displayTalk(talk) {
         if(i < talk.speakers.length-1)
             html += ', ';
     }
-    html += '</div>';
+    html += '</div>'; // .speakers
     // description
-    html += '<div class="description">'+talk.description+'</div>';
+    html += '<div class="description">';
+    html += talk.description;
+    // speaker bios
+    html += '<div class="speaker-bios">';
+    for(i=0; i<talk.speakers.length; i++) {
+        var speaker = talk.speakers[i];
+        html += '<div class="speaker-bio"><strong>'+speaker.name+'</strong> - '+speaker.bio+'</div>';
+    }
+    html += '</div>'; // .speaker_bios
+    html += '</div>'; // .description
     // footer
-    html += '</div>';
+    html += '</div>'; // .content
     html += '<div class="cleared"></div>';
-    html += '</div>';
+    html += '</div>'; // .talk
     return html;
 }
 

@@ -1,11 +1,11 @@
 var Util = (function(){
-  var have_calendar = undefined;
+  var haveCalendar = undefined;
               
   return {
-    escape_html: function(str) {
+    escapeHtml: function(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     },
-    talk_concat: function(talk) {
+    talkConcat: function(talk) {
       var arr = [talk.title, talk.description];
       var i, n = talk.speakers.length;
       for (i = 0; i < n; ++i) {
@@ -16,11 +16,11 @@ var Util = (function(){
     },
     
     // just a caching wrapper for JSInterface.haveCalendar()
-    show_calendar: function() {
-      if (have_calendar === undefined)
-        have_calendar = window.JSInterface.haveCalendar();
+    showCalendar: function() {
+      if (haveCalendar === undefined)
+        haveCalendar = window.JSInterface.haveCalendar();
       
-      return have_calendar;
+      return haveCalendar;
     }
   };
 })();

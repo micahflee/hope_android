@@ -31,7 +31,7 @@ public class JSInterface {
         private static final long EVENT_LENGTH = 3300000; // 55 minutes
 	
 	private Context context;
-	private String prefJSON;
+	private String prefJson;
 	private String prefFavorites;
 	private String prefFilter;
 	private long lastDownloadedJSON = 0;
@@ -41,7 +41,7 @@ public class JSInterface {
 		
 		// initialize preferences
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
-		prefJSON = settings.getString("json", "{ }");
+		prefJson = settings.getString("json", "{ }");
 		prefFavorites = settings.getString("favorites", "");
 		prefFilter = settings.getString("filter", "all");
 	}
@@ -51,19 +51,19 @@ public class JSInterface {
          *                      re-downloaded even if we've fetched it
          *                      recently
          * @return a JSON string */
-	public String getScheduleJSON(boolean forceDownload) {
+	public String getScheduleJson(boolean forceDownload) {
 		// if it's been less than 5 minutes since the last json pull, just return the stored value
 		if(!forceDownload) {
 			long timeDiff = System.currentTimeMillis() - lastDownloadedJSON;
 			if(timeDiff < 300000) {
 				//int seconds = (int)(timeDiff / 1000);
 				//Toast.makeText(context, "Downloaded schedule "+seconds+" seconds ago", Toast.LENGTH_SHORT).show();
-				return prefJSON;
+				return prefJson;
 			}
 		}
 		
 		// try downloading file
-    	String scheduleJSON = "";
+    	String scheduleJson = "";
     	try {
     		DefaultHttpClient client = new DefaultHttpClient();
     		URI uri = new URI(SCHEDULE_JSON_URL);
@@ -78,31 +78,31 @@ public class JSInterface {
     			sb.append(cur + "\n");
     		}
     		data.close();
-        	scheduleJSON = sb.toString();
+    		scheduleJson = sb.toString();
     	} catch (Exception e) {
     		// failed to download, so let's just return what we've got
     		lastDownloadedJSON = System.currentTimeMillis();
-    		if(prefJSON == "{ }")
+    		if(prefJson == "{ }")
     			Toast.makeText(context, "Could not download schedule, check your internet connection", Toast.LENGTH_SHORT).show();
     		else
     			Toast.makeText(context, "Using stored schedule", Toast.LENGTH_SHORT).show();
-    		return prefJSON;
+    		return prefJson;
     	}
     	
     	// downloaded new json successfully, now save it and return it
-    	prefJSON = scheduleJSON;
+    	prefJson = scheduleJson;
     	SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putString("json", prefJSON);
+		editor.putString("json", prefJson);
 		editor.commit();
 		lastDownloadedJSON = System.currentTimeMillis();
 		Toast.makeText(context, "Downloaded latest schedule", Toast.LENGTH_SHORT).show();
-		return prefJSON;
+		return prefJson;
 	}
 	
-	public String getNoticeJSON() {
+	public String getNoticeJson() {
 		// try downloading file
-    	String noticeJSON = "";
+    	String noticeJson = "";
     	try {
     		DefaultHttpClient client = new DefaultHttpClient();
     		URI uri = new URI(NOTICE_JSON_URL);
@@ -117,11 +117,11 @@ public class JSInterface {
     			sb.append(cur + "\n");
     		}
     		data.close();
-    		noticeJSON = sb.toString();
+    		noticeJson = sb.toString();
     	} catch (Exception e) {
     		return "{ \"didNotLoad\" : true }";
     	}
-    	return noticeJSON;
+    	return noticeJson;
 	}
 	
     /** get the user's favorites

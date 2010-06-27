@@ -1,6 +1,6 @@
-function random_background() {
-    var random_number = Math.floor(Math.random()*4)+1;
-    $("#body").css('background-image', 'url("images/background'+random_number+'.jpg")');
+function randomBackground() {
+    var randomNumber = Math.floor(Math.random()*4)+1;
+    $("#body").css('background-image', 'url("images/background'+randomNumber+'.jpg")');
 }
 
 function init() {
@@ -9,31 +9,31 @@ function init() {
     filter.load();
 }
 
-function bind_talk_callbacks() {
+function bindTalkCallbacks() {
   $(".content").click(function() {
     $(".description", this).toggle(200);
   });
 
   $(".fav").click(function() {
     var $this = $(this);
-    var talk_id = $this.attr('talk_id');
-    if(favorites.isFavorite(talk_id)) {
+    var talkId = $this.attr('talkId');
+    if(favorites.isFavorite(talkId)) {
       $this.attr('src', 'images/fav_off.png');
-      favorites.remove(talk_id);
+      favorites.remove(talkId);
     } else {
       $this.attr('src', 'images/fav_on.png');
-      favorites.add(talk_id);
+      favorites.add(talkId);
     }
   });
   
   $(".cal").click(function() {
     var $this = $(this);
-    var talk_id = $this.attr('talk_id');
-    window.JSInterface.addToCalendar(JSON.stringify(data.talk_by_id(talk_id)));
+    var talkId = $this.attr('talkId');
+    window.JSInterface.addToCalendar(JSON.stringify(data.talkById(talkId)));
   });
 }
 
-function formatted_date(timestamp) {
+function formattedDate(timestamp) {
     var date = new Date(timestamp*1000);
     
     // hours
@@ -52,11 +52,11 @@ function formatted_date(timestamp) {
         minutes = '0'+minutes;
     
     // day of the week
-    var day = day_of_talk(timestamp);
+    var day = dayOfTalk(timestamp);
     return day+' '+hours+':'+minutes+am_pm;
 }
 
-function day_of_talk(timestamp) {
+function dayOfTalk(timestamp) {
     var date = new Date(timestamp*1000);
     var day = date.getDay();
     switch(day) {
@@ -78,23 +78,23 @@ function favimg(id) {
         return 'fav_off.png';
 }
 
-function display_talk(talk) {
+function displayTalk(talk) {
     var i;
     var html = '';
     html += '<div class="talk" id="talk'+talk.id+'">';
     
     // favorite image
     var img_src = favimg(talk.id);
-    html += '<div class="icons"><img class="fav" src="images/'+img_src+'" talk_id="'+talk.id+'" />';
-    if (Util.show_calendar()) {
-        html += '<br/><img src="images/cal.png" class="cal" talk_id="'+talk.id+'" />';
+    html += '<div class="icons"><img class="fav" src="images/'+img_src+'" talkId="'+talk.id+'" />';
+    if (Util.showCalendar()) {
+        html += '<br/><img src="images/cal.png" class="cal" talkId="'+talk.id+'" />';
     }
     html += '</div>';
-    html += '<div class="content" talk_id="'+talk.id+'">';
+    html += '<div class="content" talkId="'+talk.id+'">';
     // title
     html += '<div class="title">'+talk.title+'</div>';
     // time, location
-    html += '<div class="meta">'+formatted_date(talk.timestamp)+' | '+talk.location+'</div>';
+    html += '<div class="meta">'+formattedDate(talk.timestamp)+' | '+talk.location+'</div>';
     // speaker(s)
     html += '<div class="speakers">';
     for(i=0; i<talk.speakers.length; i++) {
@@ -113,7 +113,7 @@ function display_talk(talk) {
     return html;
 }
 
-function display_talks() {
+function displayTalks() {
     var html = '';
     
     if(!data.talks().length) {
@@ -122,8 +122,8 @@ function display_talks() {
         $("#content").html(html);
         
         $("#force-download").bind('click', function() {
-            data.load_force();
-            display_talks();
+            data.loadForce();
+            displayTalks();
         });
         return;
     }
@@ -133,12 +133,12 @@ function display_talks() {
     // display all the talks for the current day
     for(var i=0; i<data.talks().length; i++) {
         var talk = data.talks()[i];
-        if(filter.filter_func(talk))
-            html += display_talk(talk);
+        if(filter.filterFunc(talk))
+            html += displayTalk(talk);
     }
     $("#content").html(html);
     
     // bind stuff
-    bind_talk_callbacks();
-    filter.bind_callbacks();
+    bindTalkCallbacks();
+    filter.bindCallbacks();
 }

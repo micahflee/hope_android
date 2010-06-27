@@ -11,7 +11,7 @@
         // for some reason loading screen won't display if we don't wait 1/10 of a second first
         window.setTimeout(function() {
             var html = '<p class="only">';
-            var notice = JSON.parse(window.JSInterface.getNoticeJSON());
+            var notice = JSON.parse(window.JSInterface.getNoticeJson());
             if(notice.didNotLoad) {
                 html += 'Unable to load a notice at this time. Check your internet connection.';
             } else {

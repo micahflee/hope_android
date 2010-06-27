@@ -19,22 +19,22 @@
             init();
             
             // define the filter function
-            filter.filter_func = function(talk) {
+            filter.filterFunc = function(talk) {
                 var dayMatches;
                 if(filter.filter == 'all')
                     dayMatches = true;
                 else
-                    dayMatches = (day_of_talk(talk.timestamp).toLowerCase() == filter.filter);
+                    dayMatches = (dayOfTalk(talk.timestamp).toLowerCase() == filter.filter);
 
                 if (filter.query) {
-                    return dayMatches && (Util.talk_concat(talk).indexOf(filter.querylc) >= 0)
+                    return dayMatches && (Util.talkConcat(talk).indexOf(filter.querylc) >= 0)
                 } else {
                     return dayMatches;
                 }
             };
             
             // display the talks, filtering w/ above function
-            display_talks();
+            displayTalks();
             $("#content").show(400);
             $("#loading").hide(100);
         }, 100);
@@ -43,7 +43,7 @@
 </head>
 
 <body id="body">
-    <script type="text/javascript">random_background();</script>
+    <script type="text/javascript">randomBackground();</script>
     <div id="wrapper">
         <h1>Hackers on Planet Earth<br/>SCHEDULE</h1>
         <div id="content"></div>

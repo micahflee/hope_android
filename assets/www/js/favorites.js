@@ -1,22 +1,22 @@
 var favorites = {
     ids : new Array(),
     load : function() {
-        fav_str = window.JSInterface.getFavorites();
-        if(fav_str != "") {
+        favString = window.JSInterface.getFavorites();
+        if(favString != "") {
             // for some reason split() isn't working
-            // favorites.ids = fav_str.split(",");
+            // favorites.ids = favString.split(",");
             
             var delimiter = ",";
-            var temp_array = new Array(1);
+            var tempArray = new Array(1);
             var count = 0;
-            var temp_string = new String(fav_str);
-            while(temp_string.indexOf(delimiter) > 0) {
-                temp_array[count] = temp_string.substr(0,temp_string.indexOf(delimiter));
-                temp_string = temp_string.substr(temp_string.indexOf(delimiter)+1,temp_string.length-temp_string.indexOf(delimiter)+1);
+            var tempString = new String(favString);
+            while(tempString.indexOf(delimiter) > 0) {
+                tempArray[count] = tempString.substr(0,tempString.indexOf(delimiter));
+                tempString = tempString.substr(tempString.indexOf(delimiter)+1,tempString.length-tempString.indexOf(delimiter)+1);
                 count=count+1
             }
-            temp_array[count] = temp_string; 
-            favorites.ids = temp_array;
+            tempArray[count] = tempString; 
+            favorites.ids = tempArray;
         }
     },
     save : function() {
@@ -33,12 +33,12 @@ var favorites = {
         return favorites.ids.length;
     },
     remove : function(id) {
-        var new_ids = new Array();
+        var newIds = new Array();
         for(var i=0; i<favorites.ids.length; i++) {
             if(favorites.ids[i] != id && favorites.ids[i] != "")
-                new_ids.push(favorites.ids[i]);
+                newIds.push(favorites.ids[i]);
         }
-        favorites.ids = new_ids;
+        favorites.ids = newIds;
         favorites.save();
     },
     add : function(id) {

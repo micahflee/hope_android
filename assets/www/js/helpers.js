@@ -39,7 +39,10 @@ function formattedDate(timestamp) {
     // hours
     var hours = date.getUTCHours();
     var am_pm = '';
-    if(hours < 12) {
+    if (hours == 0) {
+        am_pm = 'am';
+        hours = 12;
+    } else if (hours < 12) {
         am_pm = 'am';
     } else if (hours == 12) {
         am_pm = 'pm';

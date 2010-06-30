@@ -37,17 +37,19 @@ function formattedDate(timestamp) {
     var date = new Date(timestamp*1000);
     
     // hours
-    var hours = date.getHours();
+    var hours = date.getUTCHours();
     var am_pm = '';
     if(hours < 12) {
         am_pm = 'am';
+    } else if (hours == 12) {
+        am_pm = 'pm';
     } else {
         am_pm = 'pm';
         hours -= 12;
     }
     
     // minutes
-    var minutes = date.getMinutes();
+    var minutes = date.getUTCMinutes();
     if(minutes < 10)
         minutes = '0'+minutes;
     
@@ -58,7 +60,7 @@ function formattedDate(timestamp) {
 
 function dayOfTalk(timestamp) {
     var date = new Date(timestamp*1000);
-    var day = date.getDay();
+    var day = date.getUTCDay();
     switch(day) {
         case 0: day = 'Sunday'; break;
         case 1: day = 'Monday'; break;

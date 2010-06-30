@@ -28,7 +28,8 @@ public class JSInterface {
         private static final String LOG_TAG = "JSInterface";
         // not all events are the same length, but most are and our
         // schedule JSON does't appear to tell us which ones aren't.
-        private static final long EVENT_LENGTH = 3300000; // 55 minutes
+        private static final long EVENT_LENGTH = 3300000L; // 55 minutes
+        private static final long EVENT_UTC_OFFSET = -4 * 3600 * 1000L;
 	
 	private Context context;
 	private String prefJson;
@@ -159,7 +160,7 @@ public class JSInterface {
         public void addToCalendar(String eventJson) {
            try {
                JSONObject event = new JSONObject(eventJson);
-               long startTime = event.getInt("timestamp") * 1000L;
+               long startTime = event.getInt("timestamp") * 1000L - EVENT_UTC_OFFSET;
 
                Intent intent = new Intent(Intent.ACTION_EDIT);
                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
